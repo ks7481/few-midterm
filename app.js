@@ -11,7 +11,6 @@ let nt,
 
 const timed = location.hash == "#timed";
 
-/* ---------- audio (Web Audio API, works in Safari and Chrome) ---------- */
 const AC = window.AudioContext || window.webkitAudioContext,
   ctx = new AC(),
   PEEK = 0.15,
@@ -55,7 +54,6 @@ const peek = () => {
   },
   ding = () => play("bell.mp3");
 
-// browsers only allow sound after a click, tap or key press
 const unlockEvents = ["pointerdown", "touchstart", "keydown"];
 const unlock = () =>
   ctx.resume().then(() => {
@@ -64,7 +62,6 @@ const unlock = () =>
   });
 unlockEvents.forEach((e) => addEventListener(e, unlock));
 
-/* ---------- state ---------- */
 b.dataset.m = timed ? "timed" : "walk";
 b.dataset.d = 1;
 
@@ -73,7 +70,6 @@ $("#snd").onclick = (e) => {
   e.target.textContent = "sound " + (on ? "on" : "off");
 };
 
-/* ---------- notes ---------- */
 document.querySelectorAll(".has").forEach((n) => {
   const k = n.querySelector(".k");
   const peekIfNew = () => {
@@ -104,7 +100,6 @@ document.querySelectorAll(".k").forEach((k) =>
   }),
 );
 
-/* ---------- palette, call, timer ---------- */
 const pal = (p) => {
   b.classList.toggle("s2", p >= 0.33);
   b.classList.toggle("s3", p >= 0.5);
