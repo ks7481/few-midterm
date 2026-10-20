@@ -11,55 +11,69 @@ let nt,
 
 const timed = location.hash == "#timed";
 
-const au = new Audio("paperslide.mp3"),
-  PEEK = 0.15;
-let pt;
-au.preload = "auto";
+/* ---------- audio (Web Audio API, works in Safari and Chrome) ---------- */
+const AC = window.AudioContext || window.webkitAudioContext,
+  ctx = new AC(),
+  PEEK = 0.15,
+  bufs = {};
+let peekSrc;
 
-function snd(from, stop) {
-  if (!on) return;
-  clearTimeout(pt);
-  au.currentTime = from;
-  au.play()
-    .then(() => {
-      if (stop) pt = setTimeout(() => au.pause(), stop * 1000);
-    })
+function load(name) {
+  fetch(name)
+    .then((r) => r.arrayBuffer())
+    .then((d) => new Promise((res, rej) => ctx.decodeAudioData(d, res, rej)))
+    .then((buf) => (bufs[name] = buf))
     .catch(() => {});
 }
+load("paperslide.mp3");
+load("bell.mp3");
 
-const peek = () => snd(0, PEEK),
-  reveal = () => snd(PEEK, 0);
-  const bell = new Audio("bell.mp3");
-bell.preload = "auto";
-
-function ding() {
-  if (!on) return;
-  bell.currentTime = 0;
-  bell.play().catch(() => {});
+function play(name, from = 0, dur) {
+  const buf = bufs[name];
+  if (!on || !buf) return null;
+  if (ctx.state !== "running") ctx.resume();
+  const s = ctx.createBufferSource();
+  s.buffer = buf;
+  s.connect(ctx.destination);
+  s.start(0, from, dur);
+  return s;
 }
 
-addEventListener(
-  "pointerdown",
-  () => {
-    bell.muted = true;
-    bell
-      .play()
-      .then(() => {
-        bell.pause();
-        bell.currentTime = 0;
-        bell.muted = false;
-      })
-      .catch(() => {});
+function stopPeek() {
+  try {
+    if (peekSrc) peekSrc.stop();
+  } catch (e) {}
+}
+
+const peek = () => {
+    stopPeek();
+    peekSrc = play("paperslide.mp3", 0, PEEK);
   },
-  { once: true },
-);
+  reveal = () => {
+    stopPeek();
+    play("paperslide.mp3", PEEK);
+  },
+  ding = () => play("bell.mp3");
+
+// browsers only allow sound after a click, tap or key press
+const unlockEvents = ["pointerdown", "touchstart", "keydown"];
+const unlock = () =>
+  ctx.resume().then(() => {
+    if (ctx.state === "running")
+      unlockEvents.forEach((e) => removeEventListener(e, unlock));
+  });
+unlockEvents.forEach((e) => addEventListener(e, unlock));
+
+/* ---------- state ---------- */
 b.dataset.m = timed ? "timed" : "walk";
 b.dataset.d = 1;
+
 $("#snd").onclick = (e) => {
   on = !on;
   e.target.textContent = "sound " + (on ? "on" : "off");
 };
 
+/* ---------- notes ---------- */
 document.querySelectorAll(".has").forEach((n) => {
   const k = n.querySelector(".k");
   const peekIfNew = () => {
@@ -90,6 +104,7 @@ document.querySelectorAll(".k").forEach((k) =>
   }),
 );
 
+/* ---------- palette, call, timer ---------- */
 const pal = (p) => {
   b.classList.toggle("s2", p >= 0.33);
   b.classList.toggle("s3", p >= 0.5);
