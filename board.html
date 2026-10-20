@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Now Serving: The Board</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <i id="timed"></i>
+    <div class="fade"></div>
+    <button class="snd" id="snd">sound on</button>
+    <div class="stub">TICKET<br />A-047</div>
+    <header class="top">
+      <svg class="clock" viewBox="0 0 100 100" aria-label="clock">
+        <circle cx="50" cy="50" r="46" />
+        <line class="mn" x1="50" y1="50" x2="50" y2="14" />
+        <line class="hr" x1="50" y1="50" x2="50" y2="26" />
+      </svg>
+      <div class="disp" role="status">
+        <span class="d1">NOW SERVING A-045</span
+        ><span class="d2">NOW SERVING A-046</span
+        ><span class="d3">NOW SERVING A-047</span>
+      </div>
+    </header>
+    <main class="stage">
+      <div class="board">
+        <article class="n has">
+          <input class="k" type="checkbox" id="c1" aria-label="Lift Fire Exits"/>
+          <div class="paper">
+            <h3>Fire Exits</h3>
+            <p>In an emergency, walk to the nearest exit. Do not run. Do not look back at the chairs.</p>
+          </div>
+          <div class="note">This list was shorter yesterday.</div>
+        </article>
+        <article class="n">
+          <div class="paper">
+            <h3>Service Pledge</h3>
+            <p>We pledge to serve you in the order you arrived, in a timely manner.</p>
+          </div>
+        </article>
+        <article class="n big">
+          <div class="paper">
+            <h3>NOTICE OF AMENDMENT</h3>
+            <p>All prior appointments are hereby amended. Please remain seated.</p>
+          </div>
+          <div class="note">The handwriting is familiar. So is the chair. Some appointments are not made so much as kept. Who wrote the first note.</div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c2" aria-label="Lift Cleaning Schedule"/>
+          <div class="paper">
+            <h3>Cleaning Schedule</h3>
+            <p>Floors: Monday. Chairs: Wednesday. Walls: Friday. Clock: never.</p>
+          </div>
+          <div class="note">The floor is dirty where I sit. It always is.</div>
+        </article>
+        <article class="n">
+          <div class="paper">
+            <h3>Form 12-B</h3>
+            <p>Form 12-B is now Form 12-C. Form 12-C is unavailable.</p>
+          </div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c3" aria-label="Lift Parking Permits"/>
+          <div class="paper">
+            <h3>Parking Permits</h3>
+            <p>Permits must be displayed at all times. Expired permits will not be amended.
+            </p>
+          </div>
+          <div class="note">Mine expired. I never parked here.</div>
+        </article>
+        <article class="n">
+          <div class="paper">
+            <h3>Do Not Adjust The Clock</h3>
+            <p>The clock is correct. It will not be discussed.</p>
+          </div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c4" aria-label="Lift Take One Number"/>
+          <div class="paper">
+            <h3>Take One Number</h3>
+            <p>Take one number only. Numbers are not reusable.</p>
+          </div>
+          <div class="note">Numbers are reused. Check the slip.</div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c5" aria-label="Lift Lost &amp; Found"/>
+          <div class="paper">
+            <h3>Lost &amp; Found</h3>
+            <p>Found: one pen, one glove, one appointment.</p>
+          </div>
+          <div class="note">The pen writes the way I do.</div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c6" aria-label="Lift Office Hours"/>
+          <div class="paper">
+            <h3>Office Hours</h3>
+            <p>Mon-Fri, 9 to 5. Hours are not subject to amendment.</p>
+          </div>
+          <div class="note">It said 8 to 7 two days ago.</div>
+        </article>
+        <article class="n">
+          <div class="paper">
+            <h3>Recycling</h3>
+            <p>Paper, glass, cardboard.</p>
+          </div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c7" aria-label="Lift Quiet Please"/>
+          <div class="paper">
+            <h3>Quiet Please</h3>
+            <p>Waiting is a shared experience. Please wait quietly.</p>
+          </div>
+          <div class="note">I have waited quietly before.</div>
+        </article>
+        <article class="n">
+          <div class="paper">
+            <h3>Unclaimed Items</h3>
+            <p>Items unclaimed after one visit become property of the Office.</p>
+          </div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c8" aria-label="Lift Water Cooler"/>
+          <div class="paper">
+            <h3>Water Cooler</h3>
+            <p>Cups are provided according to the number of seats. Return the cups after use.</p>
+          </div>
+          <div class="note">One cup fewer than people.</div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c9" aria-label="Lift Staff Directory"/>
+          <div class="paper">
+            <h3>Staff Directory</h3>
+            <p>Window 3: Clerk. Name on request.</p>
+          </div>
+          <div class="note">The name on request is mine.</div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c10" aria-label="Lift Emergency Contacts"/>
+          <div class="paper">
+            <h3>Emergency Contacts</h3>
+            <p>To ensure your contact details are current you must fill out a form after every visit.</p>
+          </div>
+          <div class="note">My number is already on it.</div>
+        </article>
+        <article class="n has">
+          <input class="k" type="checkbox" id="c11" aria-label="Lift Visitor Log"/>
+          <div class="paper">
+            <h3>Visitor Log</h3>
+            <p>Please sign the visitor log upon entry.</p>
+          </div>
+          <div class="note">The log is full. One name.</div>
+        </article>
+      </div>
+      <aside class="hall" aria-hidden="true">
+        <div class="sign">Window 3</div>
+        <div class="win">
+          <div class="cam">
+            <div class="ce"></div>
+            <div class="lw"></div>
+            <div class="rw"></div>
+            <div class="fl"></div>
+            <div class="far"></div>
+            <div class="ctr"></div>
+            <div class="lit"></div>
+          </div>
+        </div>
+      </aside>
+    </main>
+    <div class="seats" aria-hidden="true">
+      <div class="ch c1" title="chair 1"><i></i><b></b></div>
+      <div class="ch c2" title="chair 2"><i></i><b></b></div>
+      <div class="ch c3" title="chair 3">
+        <span class="who"><u></u></span><i></i><b></b>
+      </div>
+      <div class="ch c4" title="chair 4"><i></i><b></b></div>
+      <div class="ch c5" title="chair 5"><i></i><b></b></div>
+      <div class="ch c6" title="chair 6"><i></i><b></b></div>
+      <div class="ch c7 me" title="chair 7"><i></i><b></b></div>
+      <div class="ch c8" title="chair 8"><i></i><b></b></div>
+      <div class="ch c9" title="chair 9"><i></i><b></b></div>
+      <div class="ch c10" title="chair 10">
+        <span class="who"><u></u></span><i></i><b></b>
+      </div>
+      <div class="ch c11" title="chair 11"><i></i><b></b></div>
+      <div class="ch c12" title="chair 12"><i></i><b></b></div>
+    </div>
+    <p class="gowrap"><a class="go" href="#called">Go to the window</a></p>
+    <nav class="tray" id="called">
+      <a class="slip u" href="sign.html">Sign here</a
+      ><a class="slip a" href="#pin">Pin your note</a
+      ><a class="slip" href="walkout.html">Exit</a
+      ><a class="slip small" href="noshow.html">Stay seated</a>
+    </nav>
+    <section class="pinov" id="pin">
+      <div class="card">
+        <h3>Pin your note</h3>
+        <p>Leave a note for whoever waits next. Type it, then click away to pin it.</p>
+        <input type="text" placeholder="type anything" aria-label="note" />
+        <div class="pinned hand">Pinned.</div>
+        <a class="next" href="index.html">Next &rarr;</a>
+      </div>
+    </section>
+  </body>
+</html>

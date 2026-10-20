@@ -1,0 +1,1 @@
+document.querySelector("#when").textContent = new Date().toLocaleString();
